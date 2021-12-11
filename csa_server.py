@@ -17,20 +17,20 @@ with g.subgraph(name='cluster_root') as c:
 
     with c.subgraph(name='cluster_init') as c2:
         c2.attr(color='pink', label='Init')
-        c2.node('1')
+        c2.node('1', color="pink")
         c2.node('Login')
         c2.edge('1', 'Login', label='login')
         c2.edge('Login', '1', label='incorrect')
 
     with c.subgraph(name='cluster_lobby') as c2:
         c2.attr(color='pink', label='Lobby')
-        c2.node('2')
+        c2.node('2', color="pink")
         c2.node('Logout')
         c2.edge("2", "Logout", label="logout")
 
     with c.subgraph(name='cluster_reply') as c2:
         c2.attr(color='pink', label='Reply')
-        c2.node('3')
+        c2.node('3', color="pink")
         c2.node('Agree')
         c2.node('Reject')
         c2.edge("3", "Agree", label="agree")
@@ -38,7 +38,7 @@ with g.subgraph(name='cluster_root') as c:
 
     with c.subgraph(name='cluster_game') as c2:
         c2.attr(color='pink', label='Game')
-        c2.node('4')
+        c2.node('4', color="pink")
         c2.edge("4", "4", label="Move")
         c2.edge("4", "4", label="MoveEcho")
 

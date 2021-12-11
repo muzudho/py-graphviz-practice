@@ -6,20 +6,20 @@ digraph {
 		Start -> 1 [label=Start]
 		subgraph cluster_init {
 			color=pink label=Init
-			1
+			1 [color=pink]
 			Login
 			1 -> Login [label=login]
 			Login -> 1 [label=incorrect]
 		}
 		subgraph cluster_lobby {
 			color=pink label=Lobby
-			2
+			2 [color=pink]
 			Logout
 			2 -> Logout [label=logout]
 		}
 		subgraph cluster_reply {
 			color=pink label=Reply
-			3
+			3 [color=pink]
 			Agree
 			Reject
 			3 -> Agree [label=agree]
@@ -27,7 +27,7 @@ digraph {
 		}
 		subgraph cluster_game {
 			color=pink label=Game
-			4
+			4 [color=pink]
 			4 -> 4 [label=Move]
 			4 -> 4 [label=MoveEcho]
 		}
