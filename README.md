@@ -14,6 +14,8 @@ pip install graphviz
 
 ```shell
 python.exe main.py
+python.exe csa_server.py
+python.exe substate.py
 ```
 
 # Documents
