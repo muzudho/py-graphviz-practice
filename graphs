@@ -15,16 +15,28 @@ digraph {
 			color=pink label=Lobby
 			2
 			Logout
-			Login -> 2 [label=ok]
 			2 -> Logout [label=logout]
-			Logout -> Init [label=completed]
-			2 -> Reply [label=game_summary]
 		}
-		Reply -> Game [label=Agree]
-		Reply -> Lobby [label=Reject]
-		Game -> Game [label=Move]
-		Game -> Game [label=MoveEcho]
-		Game -> Init [label=GameoverFloodgate]
-		Game -> Lobby [label=GameoverWcsc]
+		subgraph cluster_reply {
+			color=pink label=Reply
+			3
+			Agree
+			Reject
+			3 -> Agree [label=agree]
+			3 -> Reject [label=reject]
+		}
+		subgraph cluster_game {
+			color=pink label=Game
+			4
+			4 -> 4 [label=Move]
+			4 -> 4 [label=MoveEcho]
+		}
+		Login -> 2 [label=ok]
+		Logout -> 1 [label=completed]
+		Reject -> 2 [label=reject]
+		2 -> 3 [label=game_summary]
+		Agree -> 4 [label=start]
+		4 -> 2 [label=GameoverWcsc]
+		4 -> 1 [label=GameoverFloodgate]
 	}
 }

@@ -11,32 +11,43 @@ with g.subgraph(name='cluster_root') as c:
     # 開始ノード
     c.node("Start", shape="circle", color="pink")
 
-    # 有向な２つのノード
+    # ２つのノードと、その二間の有向な辺
     c.edge("Start", "1", label="Start")
 
     with c.subgraph(name='cluster_init') as c2:
         c2.attr(color='pink', label='Init')
         c2.node('1')
         c2.node('Login')
-        c2.edge('1', 'Login', 'login')
-        c2.edge('Login', '1', 'incorrect')
+        c2.edge('1', 'Login', label='login')
+        c2.edge('Login', '1', label='incorrect')
 
     with c.subgraph(name='cluster_lobby') as c2:
         c2.attr(color='pink', label='Lobby')
         c2.node('2')
         c2.node('Logout')
-        c2.edge("Login", "2", label="ok")
         c2.edge("2", "Logout", label="logout")
-        c2.edge("Logout", "Init", label="completed")
-        c2.edge("2", "Reply", label="game_summary")
 
-    c.edge("Reply", "Game", label="Agree")
-    c.edge("Reply", "Lobby", label="Reject")
+    with c.subgraph(name='cluster_reply') as c2:
+        c2.attr(color='pink', label='Reply')
+        c2.node('3')
+        c2.node('Agree')
+        c2.node('Reject')
+        c2.edge("3", "Agree", label="agree")
+        c2.edge("3", "Reject", label="reject")
 
-    c.edge("Game", "Game", label="Move")
-    c.edge("Game", "Game", label="MoveEcho")
-    c.edge("Game", "Init", label="GameoverFloodgate")
-    c.edge("Game", "Lobby", label="GameoverWcsc")
+    with c.subgraph(name='cluster_game') as c2:
+        c2.attr(color='pink', label='Game')
+        c2.node('4')
+        c2.edge("4", "4", label="Move")
+        c2.edge("4", "4", label="MoveEcho")
+
+    c.edge("Login", "2", label="ok")
+    c.edge("Logout", "1", label="completed")
+    c.edge("Reject", "2", label="reject")
+    c.edge("2", "3", label="game_summary")
+    c.edge("Agree", "4", label="start")
+    c.edge("4", "2", label="GameoverWcsc")
+    c.edge("4", "1", label="GameoverFloodgate")
 
 # 描画
 g.render("graphs")
