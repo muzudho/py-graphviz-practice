@@ -1,7 +1,7 @@
 digraph {
 	node [shape=square style=filled]
 	subgraph cluster_root {
-		color=white label=Root
+		color=white label="CSA Server protocol 1.2.1"
 		Start [color=pink shape=circle]
 		Start -> 1 [label=Start]
 		subgraph cluster_init {

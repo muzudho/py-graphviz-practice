@@ -6,7 +6,8 @@ g.attr("node", shape="square", style="filled")
 
 # クラスター 'cluster_' から名前を始める必要あり
 with g.subgraph(name='cluster_root') as c:
-    c.attr(color='white', label='Root')   # デフォルトではgraphに適用される
+    # 一番外側のクラスターのラベルは図のタイトルのように見える
+    c.attr(color='white', label='CSA Server protocol 1.2.1')
 
     # 開始ノード
     c.node("Start", shape="circle", color="pink")
